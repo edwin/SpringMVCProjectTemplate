@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 3, 2013 3:59:07 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="id.go.pajak.springmvc.bean.Kuliah" table="kuliah" catalog="testing">
+        <composite-id name="id" class="id.go.pajak.springmvc.bean.KuliahId">
+            <key-property name="id" type="int">
+                <column name="id" />
+            </key-property>
+            <key-property name="namamatakuliah" type="string">
+                <column name="namamatakuliah" length="20" />
+            </key-property>
+            <key-property name="nik" type="string">
+                <column name="nik" length="20" />
+            </key-property>
+            <key-property name="nim" type="string">
+                <column name="nim" length="20" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

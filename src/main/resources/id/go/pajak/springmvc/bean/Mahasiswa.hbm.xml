@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 3, 2013 3:58:15 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="id.go.pajak.springmvc.bean.Mahasiswa" table="mahasiswa" catalog="testing">
+        <id name="nim" type="string">
+            <column name="nim" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="nama" type="string">
+            <column name="nama" />
+        </property>
+        <property name="tgllahir" type="date">
+            <column name="tgllahir" length="10" />
+        </property>
+        <set name="kuliahs" inverse="true">
+            <key>
+                <column name="nim" length="20" />
+            </key>
+            <one-to-many class="id.go.pajak.springmvc.bean.Kuliah" />
+        </set>
+    </class>
+</hibernate-mapping>
