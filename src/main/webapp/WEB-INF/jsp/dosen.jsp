@@ -26,8 +26,9 @@
                     <thead>
                         <tr>
                             <th width="20%">NIK</th>
-                            <th width="25%">Nama</th>
-                            <th width="25%">Alamat</th>
+                            <th width="30%">Nama</th>
+                            <th width="30%">Alamat</th>
+                            <th width="20%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,14 +64,19 @@
                     "sPaginationType": "full_numbers",
                     "aaSorting": [[0,'desc']],  
                     "aoColumns" : [   
-                         { sWidth: '20%', "bSortable": false , 
+                         { sWidth: '20%', 
                             "mRender": function( data, type, row ) {
                                     return '<a href="dosen/detail/'+row[0]+'">'+row[0]+'</a>';
                             },
                         "bSortable": true,
                         "aTargets": [0]}, 
-                        { sWidth: '50%', "bSortable": false }, 
-                        { sWidth: '30%', "bSortable": false }
+                        { sWidth: '30%', "bSortable": false }, 
+                        { sWidth: '30%', "bSortable": false },
+                        {sWidth: '20%', 
+                            "mRender": function( data, type, row ) {
+                                    return '<a href="dosen/delete/'+row[0]+'">Delete</a>';
+                            },
+                        "bSortable": false}
                     ] 
                 } );	
                 

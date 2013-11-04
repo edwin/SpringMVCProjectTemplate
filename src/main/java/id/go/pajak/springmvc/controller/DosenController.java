@@ -4,6 +4,7 @@ import id.go.pajak.springmvc.bean.Base;
 import id.go.pajak.springmvc.bean.Dosen;
 import id.go.pajak.springmvc.service.DosenService;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class DosenController {
 
+    private Logger logger = Logger.getLogger(this.getClass());
+    
     @Autowired
     private DosenService dosenService;
 
@@ -30,8 +33,7 @@ public class DosenController {
     }
 
     @RequestMapping(value = "/dosen/list", method = RequestMethod.POST)
-    public @ResponseBody
-    Base index(@RequestParam Integer sEcho,
+    public @ResponseBody Base list(@RequestParam Integer sEcho,
             @RequestParam Integer iDisplayStart,
             @RequestParam Integer iDisplayLength,
             @RequestParam String sSortDir_0,
@@ -56,6 +58,16 @@ public class DosenController {
         return "dosenEdit";
     }
     
+    @RequestMapping(value ="/dosen/delete/{id}", method = RequestMethod.GET)
+    public String delete(ModelMap modelMap, @PathVariable String id) {
+        try {
+            dosenService.delete(id);
+        } catch (Exception e) {
+            logger.error(e,e);
+        }
+        return "redirect:/dosen";
+    }
+    
     @RequestMapping(value ="/dosen/new", method = RequestMethod.GET)
     public String add() {
         return "dosenEdit";
@@ -66,7 +78,7 @@ public class DosenController {
         try {
             dosenService.saveOrUpdate(dosen);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e, e);
         }
         return "redirect:/dosen";
     }

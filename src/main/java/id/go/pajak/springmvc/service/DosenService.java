@@ -1,11 +1,9 @@
 package id.go.pajak.springmvc.service;
 
-import id.go.pajak.springmvc.bean.Base;
 import id.go.pajak.springmvc.bean.Dosen;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +42,7 @@ public class DosenService extends BaseService {
         
         List<String[]> strings = new ArrayList<String[]>();
         for (Dosen dosen : dosens) {
-            String[] ses = new String[3];
+            String[] ses = new String[4];
             ses[0] = dosen.getNik();
             ses[1] = dosen.getNama();
             ses[2] = dosen.getAlamat();
@@ -56,15 +54,18 @@ public class DosenService extends BaseService {
     
     @Override
     public Object select(String nik) {
-        return (Dosen) sessionFactory.getCurrentSession().createQuery("from Dosen "
-                + "where nik = :nik")
+        return (Dosen) sessionFactory.getCurrentSession()
+                .createQuery("from Dosen where nik = :nik")
                 .setString("nik", nik)
                 .uniqueResult();
     }
 
     @Override
     public void delete(Object o) throws Exception {
-        sessionFactory.getCurrentSession().delete(o);
+        sessionFactory.getCurrentSession()
+                .createQuery("DELETE FROM Dosen where nik = :nik")
+                .setString("nik", o.toString())
+                .executeUpdate();
     }
 
     @Override
